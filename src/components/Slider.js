@@ -8,6 +8,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   background-color: #ffffff;
+  overflow: hidden;
 `;
 
 const Arrow = styled.div`
