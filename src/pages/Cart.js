@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { mobile } from "../Responsive";
 
 const Container = styled.div``;
 const Title = styled.h1`
@@ -13,6 +14,7 @@ const Title = styled.h1`
 
 const Wrapper = styled.div`
   padding: 50px;
+  ${mobile({ padding: "10px", flexDirection: "column" })}
 `;
 
 const Top = styled.div`
@@ -41,7 +43,9 @@ const TopButton = styled.button`
   }
 `;
 
-const TopTextContainer = styled.div``;
+const TopTextContainer = styled.div`
+  ${mobile({ display: "none" })}
+`;
 
 const TopText = styled.span`
   text-decoration: underline;
@@ -52,6 +56,7 @@ const TopText = styled.span`
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Info = styled.div`
@@ -62,6 +67,7 @@ const Product = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 20px 0px;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const ProductDetail = styled.div`
@@ -71,6 +77,7 @@ const ProductDetail = styled.div`
 
 const Image = styled.img`
   width: 200px;
+  ${mobile({ width: "100px" })}
 `;
 
 const Details = styled.div`
@@ -80,12 +87,17 @@ const Details = styled.div`
   justify-content: space-around;
 `;
 
-const ProductName = styled.span``;
+const ProductName = styled.span`
+  ${mobile({ fontSize: "0.8em" })}
+`;
 
-const ProductId = styled.span``;
+const ProductId = styled.span`
+  ${mobile({ fontSize: "0.8em" })}
+`;
 
 const ProductColorContainer = styled.span`
   display: flex;
+  ${mobile({ fontSize: "0.8em" })}
 `;
 
 const ProductColor = styled.span`
@@ -94,9 +106,12 @@ const ProductColor = styled.span`
   border-radius: 50%;
   background-color: ${(props) => props.color};
   margin-left: 5px;
+  ${mobile({ width: "15px", height: "15px" })}
 `;
 
-const ProductSize = styled.span``;
+const ProductSize = styled.span`
+  ${mobile({ fontSize: "0.8em" })}
+`;
 
 const PriceDetail = styled.div`
   flex: 1;
@@ -116,11 +131,13 @@ const ProductAmount = styled.div`
   font-size: 1.5em;
   margin: 5px;
   font-weight: 900;
+  ${mobile({ margin: "10px 15px", fontWeight: "700" })}
 `;
 
 const ProductPrice = styled.div`
   font-size: 1.5em;
   font-weight: 200;
+  ${mobile({ marginBottom: "10px" })}
 `;
 
 const Break = styled.hr`

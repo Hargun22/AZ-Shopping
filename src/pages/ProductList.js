@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
+import { mobile } from "../Responsive";
 
 const Container = styled.div``;
 const Title = styled.h1`
@@ -15,17 +16,20 @@ const FilterContainer = styled.div`
 `;
 const Filter = styled.div`
   margin: 20px;
+  ${mobile({ width: "0px 20px", display: "flex", flexDirection: "column" })}
 `;
 
 const FilterText = styled.span`
   font-size: 1em;
   font-weight: 600;
   margin-right: 10px;
+  ${mobile({ fontSize: "0.8em", marginRight: "0px", marginBottom: "5px" })}
 `;
 
 const Select = styled.select`
   margin-right: 20px;
   padding: 10px;
+  ${mobile({ margin: "10px 0px" })}
 `;
 
 const Option = styled.option``;

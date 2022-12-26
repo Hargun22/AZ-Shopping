@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../Responsive";
 
 const Container = styled.div`
   width: 100vw;
@@ -16,6 +17,7 @@ const Wrapper = styled.div`
   background-color: white;
   border-radius: 20px;
   border: 1px solid black;
+  ${mobile({ width: "75%" })}
 `;
 const Form = styled.form`
   display: flex;
@@ -51,6 +53,7 @@ const Button = styled.button`
   transition: all 0.3s ease;
   font-weight: 400;
   font-size: 1em;
+  ${mobile({ width: "50%" })};
 
   &:hover {
     background-color: black;
