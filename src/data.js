@@ -27,16 +27,19 @@ export const categories = [
     id: 1,
     img: "https://cdn.shopify.com/s/files/1/0419/1525/products/1024x1024-Men-Moto-Tobacco-050322-2.jpg?v=1652112663",
     title: "SHIRT STYLE!",
+    category: "men",
   },
   {
     id: 2,
     img: "https://cdn.shopify.com/s/files/1/0419/1525/products/1024x1024-Men-Moto-Tobacco-050322-2.jpg?v=1652112663",
     title: "SHOE STYLE!",
+    category: "men",
   },
   {
     id: 3,
     img: "https://cdn.shopify.com/s/files/1/0419/1525/products/1024x1024-Men-Moto-Tobacco-050322-2.jpg?v=1652112663",
     title: "JACKETS!",
+    category: "women",
   },
 ];
 

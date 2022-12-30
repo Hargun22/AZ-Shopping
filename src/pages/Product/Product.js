@@ -1,66 +1,112 @@
 import { Add, Remove } from "@mui/icons-material";
-import React from "react";
+import React, { useEffect } from "react";
 
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Newsletter from "../../components/Newsletter";
-import * as ProductStyles from "./Product-style";
+import {
+  Container,
+  Wrapper,
+  ImgContainer,
+  Image,
+  InfoContainer,
+  Title,
+  Desc,
+  Filter,
+  FilterTitle,
+  FilterSize,
+  FilterContainer,
+  FilterSizeOption,
+  FilterColor,
+  AddContainer,
+  AmountContainer,
+  Amount,
+  Button,
+  Price,
+} from "./Product-style";
+
+import { useLocation } from "react-router-dom";
+import { publicRequest } from "../../requestMethods";
 
 const Product = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+
+  const [product, setProduct] = React.useState({});
+  const [quantity, setQuantity] = React.useState(1);
+  const [color, setColor] = React.useState("");
+  const [size, setSize] = React.useState("");
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/product/" + id);
+        setProduct(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProduct();
+  }, [id]);
+
+  const handleChangeQuantity = (type) => {
+    if (type === "decrease") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const handleAddToCart = () => {};
+
   return (
-    <ProductStyles.Container>
+    <Container>
       <Navbar />
-      <ProductStyles.Wrapper>
-        <ProductStyles.ImgContainer>
-          <ProductStyles.Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
-        </ProductStyles.ImgContainer>
-        <ProductStyles.InfoContainer>
-          <ProductStyles.Title>Denim Jumpsuit</ProductStyles.Title>
-          <ProductStyles.Desc>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </ProductStyles.Desc>
-          <ProductStyles.Price>$20</ProductStyles.Price>
-          <ProductStyles.FilterContainer>
-            <ProductStyles.Filter>
-              <ProductStyles.FilterTitle>Color:</ProductStyles.FilterTitle>
-              <ProductStyles.FilterColor color="black" />
-              <ProductStyles.FilterColor color="darkblue" />
-              <ProductStyles.FilterColor color="gray" />
-            </ProductStyles.Filter>
-            <ProductStyles.Filter>
-              <ProductStyles.FilterTitle>Size</ProductStyles.FilterTitle>
-              <ProductStyles.FilterSize>
-                <ProductStyles.FilterSizeOption>
-                  XS
-                </ProductStyles.FilterSizeOption>
-                <ProductStyles.FilterSizeOption>
-                  S
-                </ProductStyles.FilterSizeOption>
-                <ProductStyles.FilterSizeOption>
-                  M
-                </ProductStyles.FilterSizeOption>
-                <ProductStyles.FilterSizeOption>
-                  L
-                </ProductStyles.FilterSizeOption>
-                <ProductStyles.FilterSizeOption>
-                  XL
-                </ProductStyles.FilterSizeOption>
-              </ProductStyles.FilterSize>
-            </ProductStyles.Filter>
-          </ProductStyles.FilterContainer>
-          <ProductStyles.AddContainer>
-            <ProductStyles.AmountContainer>
-              <Remove />
-              <ProductStyles.Amount>1</ProductStyles.Amount>
-              <Add />
-            </ProductStyles.AmountContainer>
-            <ProductStyles.Button>ADD TO CART</ProductStyles.Button>
-          </ProductStyles.AddContainer>
-        </ProductStyles.InfoContainer>
-      </ProductStyles.Wrapper>
+      <Wrapper>
+        <ImgContainer>
+          <Image src={product.image} />
+        </ImgContainer>
+        <InfoContainer>
+          <Title>Denim Jumpsuit</Title>
+          <Desc>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Desc>
+          <Price>{`$${product.price}`}</Price>
+          <FilterContainer>
+            <Filter>
+              <FilterTitle>Color:</FilterTitle>
+              {product.color?.map((c) => (
+                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
+              ))}
+            </Filter>
+            <Filter>
+              <FilterTitle>Size</FilterTitle>
+              <FilterSize>
+                {product.size?.map((s) => (
+                  <FilterSizeOption key={s} onChange={() => setSize(s)}>
+                    {s}
+                  </FilterSizeOption>
+                ))}
+              </FilterSize>
+            </Filter>
+          </FilterContainer>
+          <AddContainer>
+            <AmountContainer>
+              <Remove
+                style={{ cursor: "pointer" }}
+                onClick={() => handleChangeQuantity("decrease")}
+              />
+              <Amount>{quantity}</Amount>
+              <Add
+                style={{ cursor: "pointer", marginRight: "10px" }}
+                onClick={() => handleChangeQuantity("increase")}
+              />
+            </AmountContainer>
+            <Button onClick={handleAddToCart}>ADD TO CART</Button>
+          </AddContainer>
+        </InfoContainer>
+      </Wrapper>
       <Newsletter />
       <Footer />
-    </ProductStyles.Container>
+    </Container>
   );
 };
 
