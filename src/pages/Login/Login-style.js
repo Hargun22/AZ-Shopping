@@ -59,6 +59,10 @@ export const Button = styled.button`
     color: white;
     font-weight: 600;
   }
+  &:disabled {
+    cursor: not-allowed;
+    color: gray;
+  }
 `;
 
 export const LinkContainer = styled.div`
@@ -71,4 +75,10 @@ export const Link = styled.a`
   cursor: pointer;
   font-size: 0.8em;
   text-decoration: underline;
+`;
+
+export const Error = styled.div`
+  color: red;
+  font-size: 0.8em;
+  margin: 5px 0px;
 `;

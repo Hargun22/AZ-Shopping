@@ -178,35 +178,3 @@ export const Button = styled.button`
     border: 1px solid white;
   }
 `;
-
-// module.exports = {
-//   Container,
-//   Title,
-//   Wrapper,
-//   Top,
-//   TopButton,
-//   TopTextContainer,
-//   TopText,
-//   Bottom,
-//   Info,
-//   Product,
-//   ProductDetail,
-//   Image,
-//   Details,
-//   ProductName,
-//   ProductId,
-//   ProductColorContainer,
-//   ProductColor,
-//   ProductSize,
-//   PriceDetail,
-//   ProductAmountContainer,
-//   ProductAmount,
-//   ProductPrice,
-//   Break,
-//   Summary,
-//   SummaryTitle,
-//   SummaryItem,
-//   SummaryItemText,
-//   SummaryItemPrice,
-//   Button,
-// };

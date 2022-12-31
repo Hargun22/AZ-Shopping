@@ -7,9 +7,10 @@ import ProductList from "./pages/ProductList/ProductList";
 import Register from "./pages/Register/Register";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Success from "./pages/Success/Success";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  const user = true;
+  const user = useSelector((state) => state.user.currentUser);
   return (
     <Routes>
       <Route path="/" exact element={<Home />} />
