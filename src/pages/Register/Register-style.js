@@ -60,3 +60,9 @@ export const Button = styled.button`
     font-weight: 600;
   }
 `;
+
+export const Error = styled.div`
+  color: red;
+  font-size: 0.8em;
+  margin: 5px 0px;
+`;

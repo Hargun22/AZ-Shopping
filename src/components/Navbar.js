@@ -3,8 +3,10 @@ import { Badge } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../Responsive";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { getUser } from "../redux/userSlice";
+import { logout } from "../redux/apiCalls";
 
 const Container = styled.div`
   height: 50px;
@@ -71,27 +73,60 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
+  const user = useSelector(getUser);
+  console.log(user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout(dispatch, navigate);
+  };
 
   return (
     <Container>
       <Wrapper>
         <Left>
           <Language>EN</Language>
-          <SearchContainer>
+          {/* <SearchContainer>
             <Input
               style={{ color: "gray", fontSize: 12 }}
               placeholder="Search"
             />
             <Search />
-          </SearchContainer>
+          </SearchContainer> */}
         </Left>
         <Center>
           <Logo>AZ Shopping</Logo>
         </Center>
         <Right>
-          <MenuItem>Register</MenuItem>
-          <MenuItem>Sign In</MenuItem>
-          <Badge badgeContent={quantity} color="primary">
+          {!user ? (
+            <>
+              <MenuItem>
+                <Link
+                  style={{ color: "black", textDecoration: "none" }}
+                  to="/register"
+                >
+                  Register
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link
+                  style={{ color: "black", textDecoration: "none" }}
+                  to="/login"
+                >
+                  Sign In
+                </Link>
+              </MenuItem>
+            </>
+          ) : (
+            <MenuItem onClick={(e) => handleLogout(e)}>Log out</MenuItem>
+          )}
+          <Badge
+            style={{ marginLeft: "10px" }}
+            badgeContent={quantity}
+            color="primary"
+          >
             <Link style={{ color: "black" }} to="/cart">
               <ShoppingCartOutlined />
             </Link>

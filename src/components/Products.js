@@ -20,11 +20,14 @@ const Products = ({ category, filters, sort }) => {
     const getProducts = async () => {
       try {
         const res = await publicRequest.get(
-          category ? `/product?category=${category}` : "/product"
+          category ? `/product?category=${category}` : "/product/"
         );
         res.data.map((item) => (item.createdAt = new Date(item.createdAt)));
+        console.log(res.data);
         setProducts(res.data);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     };
     getProducts();
   }, [category]);
@@ -59,9 +62,7 @@ const Products = ({ category, filters, sort }) => {
     <Container>
       {category
         ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
-        : products
-            .slice(0, 5)
-            .map((item) => <Product item={item} key={item._id} />)}
+        : products.map((item) => <Product item={item} key={item._id} />)}
     </Container>
   );
 };

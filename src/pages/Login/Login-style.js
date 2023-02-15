@@ -70,11 +70,12 @@ export const LinkContainer = styled.div`
   flex-direction: column;
 `;
 
-export const Link = styled.a`
+export const HyperLink = styled.a`
   margin: 5px 0px;
   cursor: pointer;
   font-size: 0.8em;
   text-decoration: underline;
+  color: black;
 `;
 
 export const Error = styled.div`
