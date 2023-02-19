@@ -14,10 +14,9 @@ import {
   Desc,
   Filter,
   FilterTitle,
-  FilterSize,
+  FilterType,
   FilterContainer,
-  FilterSizeOption,
-  FilterColor,
+  FilterOption,
   AddContainer,
   AmountContainer,
   Amount,
@@ -45,6 +44,7 @@ const Product = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/product/" + id);
+        console.log(res.data);
         setProduct(res.data);
         setSize(res.data.size[0]);
         setColor(res.data.color[0]);
@@ -72,26 +72,28 @@ const Product = () => {
       <Navbar />
       <Wrapper>
         <ImgContainer>
-          <Image src={product.image} />
+          <Image src={product.imageUrl} />
         </ImgContainer>
         <InfoContainer>
-          <Title>Denim Jumpsuit</Title>
-          <Desc>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Desc>
+          <Title>{product.title}</Title>
+          <Desc>{product.description}</Desc>
           <Price>{`$${product.price}`}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color:</FilterTitle>
-              {product.color?.map((c) => (
-                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
-              ))}
+              <FilterType onChange={(e) => setColor(e.target.value)}>
+                {product.color?.map((c) => (
+                  <FilterOption key={c}>{c}</FilterOption>
+                ))}
+              </FilterType>
             </Filter>
             <Filter>
-              <FilterTitle>Size</FilterTitle>
-              <FilterSize onChange={(e) => setSize(e.target.value)}>
+              <FilterTitle>Size: </FilterTitle>
+              <FilterType onChange={(e) => setSize(e.target.value)}>
                 {product.size?.map((s) => (
-                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                  <FilterOption key={s}>{s}</FilterOption>
                 ))}
-              </FilterSize>
+              </FilterType>
             </Filter>
           </FilterContainer>
           <AddContainer>

@@ -29,6 +29,7 @@ const Info = styled.div`
 const Title = styled.h1`
   color: white;
   margin-bottom: 20px;
+  ${mobile({ fontSize: "1.5rem" })}
 `;
 const Button = styled.button`
   border: none;
@@ -42,7 +43,7 @@ const Button = styled.button`
 const CategoryItem = ({ item }) => {
   return (
     <Container>
-      <Link to={`/products/${item.category}`}>
+      <Link to="/products" state={{ item }}>
         <Image src={item.img} />
         <Info>
           <Title>{item.title}</Title>

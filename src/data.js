@@ -26,46 +26,13 @@ export const categories = [
   {
     id: 1,
     img: "https://cdn.shopify.com/s/files/1/0419/1525/products/1024x1024-Men-Moto-Tobacco-050322-2.jpg?v=1652112663",
-    title: "SHIRT STYLE!",
+    title: "Men Fashion",
     category: "men",
   },
   {
     id: 2,
-    img: "https://cdn.shopify.com/s/files/1/0419/1525/products/1024x1024-Men-Moto-Tobacco-050322-2.jpg?v=1652112663",
-    title: "SHOE STYLE!",
-    category: "men",
-  },
-  {
-    id: 3,
-    img: "https://cdn.shopify.com/s/files/1/0419/1525/products/1024x1024-Men-Moto-Tobacco-050322-2.jpg?v=1652112663",
-    title: "JACKETS!",
+    img: "https://img.freepik.com/free-photo/studio-shot-pretty-black-woman-with-white-shopping-bag-standing-yellow-background-trendy-spring-fashionable-look_273443-10.jpg",
+    title: "Women Fashion",
     category: "women",
-  },
-];
-
-export const popularProducts = [
-  {
-    id: 1,
-    img: "https://www.freepnglogos.com/uploads/cap-png/cap-top-best-baseball-caps-reviews-1.png",
-  },
-  {
-    id: 2,
-    img: "https://www.pngall.com/wp-content/uploads/5/Light-Blue-Men-Jeans-PNG-Image.png",
-  },
-  {
-    id: 3,
-    img: "https://i.pinimg.com/originals/f4/5f/60/f45f608cc8624fd6404b0aa6df42607f.png",
-  },
-  {
-    id: 4,
-    img: "https://purepng.com/public/uploads/large/purepng.com-men-t-shirtclothingmen-t-shirtfashion-dress-shirt-cloth-tshirt-631522326839zoswy.png",
-  },
-  {
-    id: 5,
-    img: "https://www.pngmart.com/files/22/T-Shirt-PNG-Transparent.png",
-  },
-  {
-    id: 6,
-    img: "https://www.freeiconspng.com/thumbs/shoes-png/men-shoes-png-images-red-shoes-22.png",
   },
 ];

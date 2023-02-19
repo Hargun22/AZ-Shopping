@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { popularProducts } from "../data";
 import Product from "./Product";
-import axios from "axios";
-import { publicRequest } from "../requestMethods";
+import { getProducts } from "../Helper";
 
 const Container = styled.div`
   padding: 20px;
@@ -17,31 +15,22 @@ const Products = ({ category, filters, sort }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await publicRequest.get(
-          category ? `/product?category=${category}` : "/product/"
-        );
-        res.data.map((item) => (item.createdAt = new Date(item.createdAt)));
-        console.log(res.data);
-        setProducts(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getProducts();
+    getProducts(category, setProducts);
+    getProducts(category, setFilteredProducts);
   }, [category]);
 
   useEffect(() => {
-    category &&
-      setFilteredProducts(
-        products.filter((item) =>
-          Object.entries(filters).every(([key, value]) =>
-            item[key].includes(value)
-          )
-        )
-      );
-  }, [category, filters, products]);
+    setFilteredProducts(
+      products.filter((item) => {
+        let isMatch = true;
+        console.log(filters);
+        Object.entries(filters).every(([key, value]) => {
+          isMatch = item[key].includes(value) && isMatch;
+        });
+        return isMatch;
+      })
+    );
+  }, [filters]);
 
   useEffect(() => {
     if (sort === "newest") {
@@ -57,12 +46,12 @@ const Products = ({ category, filters, sort }) => {
         [...prev].sort((a, b) => b.price - a.price)
       );
     }
-  }, [sort]);
+  }, [filters, products, sort]);
   return (
     <Container>
-      {category
-        ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
-        : products.map((item) => <Product item={item} key={item._id} />)}
+      {filteredProducts.map((item) => (
+        <Product item={item} key={item._id} />
+      ))}
     </Container>
   );
 };

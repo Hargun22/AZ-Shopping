@@ -49,19 +49,11 @@ export const FilterTitle = styled.span`
   font-size: 1em;
   font-weight: 200;
 `;
-export const FilterColor = styled.div`
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  margin: 0px 3px;
-  cursor: pointer;
-`;
-export const FilterSize = styled.select`
+export const FilterType = styled.select`
   margin-left: 10px;
   padding: 5px;
 `;
-export const FilterSizeOption = styled.option``;
+export const FilterOption = styled.option``;
 
 export const AddContainer = styled.div`
   display: flex;

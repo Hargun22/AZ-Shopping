@@ -20,4 +20,9 @@ const cartSlice = createSlice({
 
 export const { addToCart } = cartSlice.actions;
 
+export const selectCart = (state) => state.cart;
+export const selectQuantity = (state) => state.cart.quantity;
+export const selectTotal = (state) => state.cart.total;
+export const selectProducts = (state) => state.cart.products;
+
 export default cartSlice.reducer;

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getUser } from "../redux/userSlice";
 import { logout } from "../redux/apiCalls";
+import { selectCart, selectQuantity } from "../redux/cartSlice";
 
 const Container = styled.div`
   height: 50px;
@@ -72,9 +73,8 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
-  const quantity = useSelector((state) => state.cart.quantity);
+  const quantity = useSelector(selectQuantity);
   const user = useSelector(getUser);
-  console.log(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -97,7 +97,9 @@ const Navbar = () => {
           </SearchContainer> */}
         </Left>
         <Center>
-          <Logo>AZ Shopping</Logo>
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+            <Logo>AZ Shopping</Logo>
+          </Link>
         </Center>
         <Right>
           {!user ? (

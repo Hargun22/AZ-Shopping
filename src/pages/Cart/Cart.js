@@ -38,11 +38,12 @@ import {
 } from "./Cart-style";
 import { userRequest, publicRequest } from "../../requestMethods";
 import { useNavigate } from "react-router-dom";
+import { selectCart } from "../../redux/cartSlice";
 
 const STRIPE_KEY = process.env.REACT_STRIPE_KEY;
 
 const Cart = () => {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector(selectCart);
   const [stripeToken, setStripeToken] = React.useState(null);
   const navigate = useNavigate();
 
@@ -89,7 +90,7 @@ const Cart = () => {
             {cart.products.map((product) => (
               <Product key={product._id}>
                 <ProductDetail>
-                  <Image src={product.image} />
+                  <Image src={product.imageUrl} />
                   <Details>
                     <ProductName>
                       <b>Product:</b> {product.title}

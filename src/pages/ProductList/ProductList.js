@@ -19,35 +19,62 @@ import { capitalizeFirstLetter } from "../../Helper";
 
 const ProductList = () => {
   const location = useLocation();
-  const category = location.pathname.split("/")[2];
   const [filters, setFilters] = React.useState({});
   const [sort, setSort] = React.useState("newest");
+  const [category, setCategory] = React.useState(
+    location.state.item?.category || null
+  );
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setFilters({
-      ...filters,
-      [e.target.name]: value,
-    });
+    if (value === "All Sizes" || value === "All Colours") {
+      const newFilters = { ...filters };
+      delete newFilters[e.target.name];
+      setFilters(newFilters);
+    } else {
+      setFilters({
+        ...filters,
+        [e.target.name]: value,
+      });
+    }
   };
 
   return (
     <Container>
       <Navbar />
-      <Title>{capitalizeFirstLetter(category)}</Title>
       <FilterContainer>
         <Filter>
+          <FilterText>Filter Category:</FilterText>
+          <Select
+            onChange={(e) => {
+              if (e.target.value === "All") {
+                setCategory(null);
+              } else {
+                setCategory(e.target.value.toLowerCase());
+              }
+            }}
+            defaultValue={category || "All"}
+          >
+            <Option disabled>Category</Option>
+            <Option value="All">All</Option>
+            <Option value="men">Men</Option>
+            <Option value="women">Women</Option>
+          </Select>
+        </Filter>
+        <Filter>
           <FilterText>Filter Prodcuts:</FilterText>
-          <Select name="color" onChange={handleChange}>
+          <Select name="color" onChange={(e) => handleChange(e)}>
             <Option disabled>Color</Option>
+            <Option>All Colours</Option>
             <Option>White</Option>
             <Option>Black</Option>
             <Option>Red</Option>
             <Option>Blue</Option>
             <Option>Yellow</Option>
           </Select>
-          <Select name="size" onChange={handleChange}>
+          <Select name="size" onChange={(e) => handleChange(e)}>
             <Option disabled>Size</Option>
+            <Option>All Sizes</Option>
             <Option>XS</Option>
             <Option>S</Option>
             <Option>M</Option>
